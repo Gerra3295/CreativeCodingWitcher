@@ -3,8 +3,8 @@ using Pathfinding.Serialization.JsonFx; //make sure you include this using
 
 public class Sketch : MonoBehaviour {
     public GameObject myPrefab;
-    public string _WebsiteURL = "http://tetsu3295.azurewebsites.net/tables/Product?zumo-api-version=2.0.0";
-
+    public string _WebsiteURL = "http://tetsu3295.azurewebsites.net/tables/Trello3295?zumo-api-version=2.0.0";
+   // public string _WebsiteURL = "http://tetsu3295.azurewebsites.net/tables/Trello3295?zumo-api-version=2.0.0";
     void Start () {
         //Reguest.GET can be called passing in your ODATA url as a string in the form:
         //http://{Your Site Name}.azurewebsites.net/tables/{Your Table Name}?zumo-api-version=2.0.0
@@ -19,18 +19,19 @@ public class Sketch : MonoBehaviour {
         }
 
         //We can now deserialize into an array of objects - in this case the class we created. The deserializer is smart enough to instantiate all the classes and populate the variables based on column name.
-        Product[] products = JsonReader.Deserialize<Product[]>(jsonResponse);
+        Trello[] trellos = JsonReader.Deserialize<Trello[]>(jsonResponse);
 
         //----------------------
         //YOU WILL NEED TO DECLARE SOME VARIABLES HERE SIMILAR TO THE CREATIVE CODING TUTORIAL
-
+        Debug.Log(jsonResponse); //added to fix Null bug
 
         //----------------------
                 //We can now loop through the array of objects and access each object individually
-        foreach (Product product in products)
+        foreach (Trello trello in trellos)
         {
             //Example of how to use the object
-            Debug.Log("This products name is: " + product.ProductName);
+            Debug.Log(trello.Title);
+            // Debug.Log("This products name is: " + trello.Title);
             //----------------------
             //YOUR CODE TO INSTANTIATE NEW PREFABS GOES HERE
             int totalCubes = 30;
@@ -47,7 +48,7 @@ public class Sketch : MonoBehaviour {
                 var newCube = (GameObject)Instantiate(myPrefab, new Vector3(x, y, z), Quaternion.identity); //Quaternion is default identity;
                 newCube.GetComponent<CubeScript>().SetSize(.45f * (1.0f - perc));
                 newCube.GetComponent<CubeScript>().rotateSpeed = .2f + perc * 4.0f;
-                newCube.GetComponentInChildren<TextMesh>().text = product.ProductName;
+                newCube.GetComponentInChildren<TextMesh>().text = trello.Title;
 
             i++;
                 //----------------------

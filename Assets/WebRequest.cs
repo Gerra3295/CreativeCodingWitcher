@@ -15,6 +15,7 @@ public class Request : MonoBehaviour
 
             //Setting request headers
             request.Method = "GET";
+            request.Timeout = 999999;
             request.ContentType = "application/x-www-form-urlencoded";
 
             //Making the request
