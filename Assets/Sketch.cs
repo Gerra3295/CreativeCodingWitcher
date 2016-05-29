@@ -34,23 +34,39 @@ public class Sketch : MonoBehaviour {
             // Debug.Log("This products name is: " + trello.Title);
             //----------------------
             //YOUR CODE TO INSTANTIATE NEW PREFABS GOES HERE
-            int totalCubes = 30;
+            int totalCubes = 20; //trellos.Length;
 
-            float totalDistance = 2.9f;
+            float totalDistance = 5.0f; //2.9f
 
                 float perc = i / (float)totalCubes;
                 float sin = Mathf.Sin(perc * Mathf.PI / 2);
 
-                float x = 1.8f + sin * totalDistance;
+                float x = 3.0f + sin * totalDistance;
                 float y = 5.0f;
                 float z = 0.0f;
 
                 var newCube = (GameObject)Instantiate(myPrefab, new Vector3(x, y, z), Quaternion.identity); //Quaternion is default identity;
-                newCube.GetComponent<CubeScript>().SetSize(.45f * (1.0f - perc));
-                newCube.GetComponent<CubeScript>().rotateSpeed = .2f + perc * 4.0f;
+                newCube.GetComponent<CubeScript>().SetSize((1.0f - perc)); //(.45f * (1.0f - perc));
+                newCube.GetComponent<CubeScript>().RotateSpeed = .1f + perc;
                 newCube.GetComponentInChildren<TextMesh>().text = trello.Title;
+                newCube.GetComponent<CubeScript>().SetSpinAxis(.1f);
+                newCube.GetComponent<Renderer>().material.color = Color.blue;
 
             i++;
+            /* gver771 */
+            if (trello.ListName == "Ass2ToDo")
+            {
+                newCube.GetComponent<Renderer>().material.color = Color.red;
+            }
+            else if (trello.ListName == "Ass2Doing")
+            {
+                newCube.GetComponent<Renderer>().material.color = Color.yellow;
+            }
+            else
+            {
+                newCube.GetComponent<Renderer>().material.color = Color.green;
+            }
+            /* gver771 */
                 //----------------------
             }
 	}

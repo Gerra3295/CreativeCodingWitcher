@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CubeScript.cs" />
-    <Compile Include="Assets\Product.cs" />
     <Compile Include="Assets\Sketch.cs" />
     <Compile Include="Assets\Trello.cs" />
     <Compile Include="Assets\WebRequest.cs" />
